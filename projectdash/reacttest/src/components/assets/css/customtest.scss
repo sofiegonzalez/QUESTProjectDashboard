@@ -1,0 +1,10 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+$theme-colors: (
+  "primary": #0074d9,
+  "danger": #ff4136
+);
+$body-bg: #8a2228;
+$body-color: #ffffff;
+$navbar-dark-color: #8a2228;
+@import "../bootstrap/scss/bootstrap";

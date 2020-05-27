@@ -1,0 +1,15 @@
+README
+
+React App
+-----------------------------------------------------------------
+1. run these commands inside of /qubit/Flashy/reacttest
+	npm install --save react-router-dom
+	npm install algoliasearch react-instantsearch-dom
+This will download node modules onto your computer. DO NOT COMMIT
+
+2. run this command inside of /qubit/Flashy/reacttest
+	npm start
+
+A simple development server will show up in browser
+	http://localhost:3000/
+

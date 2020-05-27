@@ -1,0 +1,107 @@
+echo --------- NOW TESTING USER ---------
+curl -X POST -H "Content-Type: application/json" -d "{\"email\":\"myFirstEmail@gmail.com\",\"pwd\":\"password\"}" http://0.0.0.0:5000/api/user/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"5\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/user/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"5\",\"email\":\"aUniqueEmail1@gmail.com\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/user/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"5\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/user/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"5\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/user/
+curl -X GET http://0.0.0.0:5000/api/users/
+echo --------- NOW TESTING PROJECT ---------
+curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"Lock\",\"description\":\"This is my very first project\",\"poster_path\":\"./assets/images/project1.png\",\"search_tags\":\"Spring2020, QUBIT\",\"team_id\":\"1\",\"client_id\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/project/
+
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"30\", \"poster_path\":\"./assets/images/project1.png\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/project/
+
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/projects/
+echo --------- NOW TESTING ADMIN ---------
+curl -X POST -H "Content-Type: application/json" -d "{\"office\":\"TST0001\",\"office_hours\":\"12:30pm - 1:45pm\",\"foreign_personid\":\"3\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/admin/1
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"0\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/admin/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/admins/
+echo --------- NOW TESTING COHORT ---------
+echo --------- NOW TESTING PERMISSIONS ---------
+echo --------- NOW TESTING PERSON ---------
+curl -X POST -H "Content-Type: application/json" -d "{\"first_name\":\"MyFirstName\",\"last_name\":\"MyLastName\",\"contact_email\":\"AUniqueAddress@gmail.com\",\"pronoun\":\"he,him,his\",\"title\":\"QUBIT member\",\"work_city\":\"College Park\",\"work_state\":\"Maryland\",\"linkedin\":\"www.linkedin.com/in/this-isnt-a-real-link\",\"foreign_uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/
+curl -X POST -H "Content-Type: application/json" -d "{\"first_name\":\"Person\",\"last_name\":\"Two\",\"contact_email\":\"AnotherUniqueAdd@gmail.com\",\"pronoun\":\"bruh\",\"title\":\"Copy-Paster\",\"work_city\":\"College Park\",\"work_state\":\"Maryland\",\"linkedin\":\"www.linkedin.com/in/this-isnt-a-real-link-either\",\"foreign_uid\":\"3\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/
+curl -X POST -H "Content-Type: application/json" -d "{\"first_name\":\"Person\",\"last_name\":\"Three\",\"contact_email\":\"UniqueAddAgain@gmail.com\",\"pronoun\":\"she,her,hers\",\"title\":\"API Tester\",\"work_city\":\"College Park\",\"work_state\":\"Maryland\",\"linkedin\":\"www.linkedin.com/in/another-fake-link\",\"foreign_uid\":\"4\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"2\",\"first_name\":\"ARealFirst\",\"last_name\":\"ARealLastToo\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"1000\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/ & echo this test should fail
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"1000\",\"title\":\"Invalid PUT request tester\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/ & echo this test should fail
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/persons/
+echo --------- NOW TESTING QUESTEE ---------
+curl -X POST -H "Content-Type: application/json" -d "{\"major\":\"Computer Science\",\"grad_status\":\"0\",\"involved\":\"1\",\"areas_of_expertise\":\"Python, API testing, CURL copy-pasting\",\"past_internships\":\"QUBIT Industries\",\"quest_clubs\":\"The Qubit Club, Another Club\",\"foreign_cohortid\":\"1\",\"foreign_personid\":\"3\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questee/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"3\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questee/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questee/ & echo this test should fail
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questees/
+echo --------- NOW TESTING RESUME ---------
+echo --------- NOW TESTING TEAM ---------
+curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"Team 1\",\"semester\":\"Spring 2020\",\"course\":\"CMSC435\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"Team 2\",\"semester\":\"Fall 2019\",\"course\":\"CMSC433\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"Team 3\",\"semester\":\"Spring 2019\",\"course\":\"CMSC417\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/teams/
+echo --------- NOW TESTING TA ---------
+curl -X POST -H "Content-Type: application/json" -d "{\"course\":\"CMSC435\",\"semester\":\"Spring 2020\",\"office_hours\":\"12:30 - 1:45pm\",\"office\":\"IRB1234\",\"foreign_questeeid\":\"6\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/ 
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/tas/ 
+echo --------- TESTING FINISHED ---------
+-------------- THESE TESTS DO NOT WORK AS THE METHODS AREN'T IMPLEMENTED --------------
+PROJECT
+curl -X PUT -H "Content-Type: application/json" -d "{\"name\":\"THE BEST PROJECT AT UMD\",\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/project/
+curl -X PUT -H "Content-Type: application/json" -d "{\"search_tags\":\"amazing\",\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/project/
+COHORT
+curl -X POST -H "Content-Type: application/json" -d "{\"number\":\"33\",\"year\":\"2020\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohort/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"0\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohort/
+curl -X POST -H "Content-Type: application/json" -d "{\"number\":\"34\",\"year\":\"2020\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohort/
+curl -X POST -H "Content-Type: application/json" -d "{\"year\":\"2022\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohort/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohorts/
+curl -X PUT -H "Content-Type: application/json" -d "{\"year\":\"2019\",\"uid\":\"0\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohort/
+curl -X PUT -H "Content-Type: application/json" -d "{\"year\":\"2019\",\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohort/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohorts/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohort/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/cohorts/ && echo All commands should be successful except 3rd POST (DELETE should be 501 at time of writing this)
+RESUME
+curl -X POST -H "Content-Type: application/json" -d "{\"resume_path\":\"the/path/to/my/resume\",\"date_updated\":\"whatever time it is currently\",\"status\":\"0\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X POST -H "Content-Type: application/json" -d "{\"resume_path\":\"this/crazy/path/that/lands/on/my/resume\",\"date_updated\":\"I wrote this test at 10:20:39 on Apr 17,2020\",\"status\":\"0\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X POST -H "Content-Type: application/json" -d "{\"resume_path\":\"short/path\",\"date_updated\":\"maybe we should let API handle this automatically...\",\"status\":\"0\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"1\",\"status\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"100\",\"title\":\"Invalid PUT request tester\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resume/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/resumes/ && echo All commands should be successful except last GET, PUT, and DELETE (should be 404)
+PERMISSIONS
+curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"admin\",\"description\":\"admin can do everything\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"ta\",\"description\":\"tas can do more than a questee, but less than an admin\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"questee\",\"description\":\"questees can do a few things I guess\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X PUT -H "Content-Type: application/json" -d "{\"description\":\"sike QUESTEEs can do a lot actually\",\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permissions/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X PUT -H "Content-Type: application/json" -d "{\"description\":\"this text does not matter because this should be an error\",\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permission/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/permissions/ && echo All commands should be successful except last PUT and last GET to api/permission/ (both should be 404)
+PERSON
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/person/
+QUESTEE
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"100\",\"major\":\"Invalid PUT request tester\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questee/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questee/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"3\",\"major2\":\"Finance\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questee/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/questee/
+TEAM
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"100\",\"title\":\"Invalid PUT request tester\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"2\",\"course\":\"CMSC131\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"1\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/team/
+TAS
+curl -X POST -H "Content-Type: application/json" -d "{\"course\":\"CMSC435\",\"semester\":\"Spring 2020\",\"office_hours\":\"12:30 - 1:45pm\",\"office\":\"IRB1234\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X POST -H "Content-Type: application/json" -d "{\"course\":\"CMSC433\",\"semester\":\"Spring 2020\",\"office_hours\":\"11:30am - 12:30pm\",\"office\":\"IRB1234\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X POST -H "Content-Type: application/json" -d "{\"course\":\"CMSC216\",\"semester\":\"Spring 2020\",\"office_hours\":\"1:30 - 3:30pm\",\"office\":\"IRB2345\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"2\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"2\",\"course\":\"CMSC131\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"0\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X GET -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X PUT -H "Content-Type: application/json" -d "{\"uid\":\"100\",\"title\":\"Invalid PUT request tester\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X DELETE -H "Content-Type: application/json" -d "{\"uid\":\"100\"}" http://ec2-34-207-76-215.compute-1.amazonaws.com/api/ta/
+curl -X GET http://ec2-34-207-76-215.compute-1.amazonaws.com/api/tas/ && echo All commands should be successful except last GET, PUT, and DELETE (should be 404)

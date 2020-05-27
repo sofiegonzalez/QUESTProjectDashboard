@@ -1,0 +1,102 @@
+----- HOW RESOURCES FILES WORK -----
+All files under the resources folder work the same way more or less.
+- Each table of the database has a .py file for it within the resources folder
+
+
+At the top of each file, we import files/functions that are necessary for our program to work
+- From flask...
+	- Blueprint - Blueprints are what our api uses to provide functionality for all of the views/routes (more on routes later).
+		- https://flask.palletsprojects.com/en/1.1.x/tutorial/views/
+	- jsonify - jsonify is used to, not surprisingly, turn whatever is passed to the function into a JSON object. This is
+		used for formatting the result of database queries so we can return them to api callers properly.
+		- https://flask.palletsprojects.com/en/1.1.x/api/#flask.json.jsonify
+	- make_response - make_response is used to properly generate a response to any api calls. In short, this allows us to 
+		return a JSON object in addition to a specific HTTP status code after processing a request
+		- https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response
+- From flask_restful...
+	- Resource - A Resource represents a RESTful resource, and is used by the API to map functionality to each RESTful resource
+		- https://flask-restful.readthedocs.io/en/latest/api.html#flask_restful.Resource
+	- Api - Api is just the entry point for the application. It is used to wrap all of the functionality of a blueprint so it
+		can then be passed to the main api application
+		- https://flask-restful.readthedocs.io/en/latest/api.html#flask_restful.Api
+	- reqparse - reqparse is short for request parse. This allows the program to parse incoming data from requests to the api.
+		This is the main building block of the api functionality, as this allows us to read and interact with requests in an efficient manner
+		- https://flask-restful.readthedocs.io/en/latest/api.html#reqparse
+- From .query...
+	- Both db_query and db_execute are helper functions we've written that manage connecting to the database, executing a query, then
+		returning the result of the query. These functions are called whenever we want to read/manipulate data in the database
+	- This file also includes a helper for structuring query responses so they can be turned into a JSON (response_to_dict)
+
+- Import bcrypt (only in resources/user.py)
+	- bcrypt provides functionality for dealing with password storage in our database, namely generating cryptographic salts, and hashing passwords
+		- This is used to generate cryptographic salts when creating users, and to match given passwords with stored ones for signin requests
+		- https://en.wikipedia.org/wiki/Salt_(cryptography)
+
+
+Following the imports of each file is where we create and configure our request parser (this is where reqparse comes in)
+- Each .py file has its own reqparse object (the main reqparse object of each class is simply named 'parser').
+- For each field within the respective table, we add an argument to the parser to look for with parser.add_argument
+	- For example, the team table includes fields for name, semester, and course
+	- To tell the parser to grab a name from the request, we type parser.add_argument('name', location=['json', 'form', 'args'], required=True)
+		- We would also provide parser.add_argument() calls for name, semester, and course, but these are omitted from this example for the simplicity
+	- These arguments tell the parser to...
+		- ('name') - Tells parser to look for 'name' key in request body
+		- (location=['json', 'form', 'args']) - Look for this argument in the JSON of request, the form if that's submitted, or URL params.
+		- (required=True) - If an argument of name 'name' is not submitted in the request, throw an error since it's required.
+	- To see what other arguments can be supplied or the behavior of specific arguments, see reqparse documentation that is linked in imports section of this doc.
+
+
+Each file consists of classes that are necessary to handle requests to a given resource
+- For most files, we have a class for handling listing and POST, a class for handling one specific entry through resourceful routing, and a class
+	for handling relational tables where applicable.
+- The class for listing handles GET requests for grabbing all of the entries of a given table (with URL params if provided), and POST requests.
+- The class for a specific entry provides functionality for GET,PUT, and DELETE.
+- The class for handling relational tables only has POST and DELETE implemented to allow for adding and removing relations
+- By naming the functions of these classes get, post, put, and delete, Flask will automatically call the correct function depending on the request type.
+	- E.g., GET requests call the 'get' function, POST requests call the 'post' function, etc.
+	- Additionally, Flask will supply any id's expected in resourceful routing to the appropriate function
+		- E.g., A GET request to /api/project/<project_id> will automatically pass the project_id to the GET function through parameters.
+
+For each get function for a specific entry...
+- GET is used to retrieve a specific entry in the respective table.
+- The primary key of the respective table is required in the route
+	- This is reflected in the route for the function (E.g., /api/project/<project_id>)
+	- This is used to get the requested entry from the table.
+- A 200 code (ok) is returned if the query was successful.
+- A 404 code (resource not found) is returned if the provided key is not mapped to an entry in the database.
+
+For each post function for a specific entry...
+- POST is used to create a new entry within the respective table.
+- The id field is NOT required in POST functions since the database will handle this.
+	- However, parser arguments for any other field that is marked 'not null' will be set to 'required=True'.
+- A 201 code (resource created) is returned if the insert was successful.
+- A 400 code (bad request) is returned if the insert was unsuccessful for any reason.
+
+For each put function for a specific entry...
+- PUT is used to update the fields of a specific entry that already exists within the respective table.
+- The primary key of the respective table is required in the route
+	- This is reflected in the route for the function (E.g., /api/project/<project_id>)
+	- This is used to update the requested entry from the table.
+- Our program ignores fields that aren't supplied in the request (i.e., fields that weren't intended to be updated by the requestor)
+- A 200 code (ok) is returned if the update was successful.
+- A 404 code (resource not found) is returned if the provided key is not mapped to an entry in the database.
+- A 400 code (bad request) is returned if the update was unsuccessful for any other reason.
+
+For each delete function for a specific entry...
+- DELETE is used to remove a specific entry that exists within the respective table
+- The primary key of the respective table is required in the route
+	- This is reflected in the route for the function (E.g., /api/project/<project_id>)
+	- This is used to delete the requested entry from the table.
+- A 200 code (ok) is returned if the delete was successful.
+- A 404 code (resource not found) is returned if the provided key is not mapped to an entry in the database.
+- A 400 code (bad request) is returned if the delete was unsuccessful for any other reason (such as primary key being used in another relationship)
+
+At the bottom of each file is where we expose our blueprints for the main api, and register routes with our classes we've implemented
+- Each file creates a blueprint that is typically named <filename>_api, where <filename> is the name of the python file
+	- This exposes the blueprint for the main api file. 
+	- The main api file will import this blueprint, then register it in api.py
+- After exposing the blueprint, we then hook up the resources to it
+	- We first create an Api object out of the blueprint that was just created.
+	- This allows us to use the add_resource function to link our Python classes to api routes and endpoints
+	- After creating the Api object, we call api.add_resource(<name of class>, <route>, <endpoint>) to link our classes to each route/endpoint
+	- This allows the main flask app to use the correct class and its functionality depending on the route and endpoint of api requests

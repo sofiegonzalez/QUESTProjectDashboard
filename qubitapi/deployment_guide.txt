@@ -1,0 +1,15 @@
+This file outlines how to update the api deployment on the AWS EC2 instance
+
+1) Zip qubitapi folder
+2) Copy qubitapi zip file to the remote server using scp -i <your credentials> ubuntu@api.questumd.com:/home/ubuntu/
+3) Log into remote server using `ssh -i <your credentials> ubuntu@api.questumd.com`
+4) Rename old qubitapi folder to qubitapi_old (So we can roll back if needed)
+5) Unzip qubitapi.zip using `unzip qubitapi.zip`
+6) Run deployment.sh
+
+For details on how to deploy from scratch see https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04
+
+In addition to this guide you will need to:
+
+1) Configure your aws user using `aws configure`
+2) Set your environment variables for QUBIT_DB_USER, QUBIT_DB_PASSWORD, QUBIT_DB_HOST

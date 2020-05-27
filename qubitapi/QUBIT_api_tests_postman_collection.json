@@ -1,0 +1,4522 @@
+{
+	"info": {
+		"_postman_id": "157c6ddc-ab62-4cb6-b35b-846c5f457dc3",
+		"name": "QUBIT Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin Tests",
+			"item": [
+				{
+					"name": "POST admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"office\": \"IRB1001\",\n\t\"office_hours\":\"Never!\",\n\t\"person_id\":3\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admins",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST admin (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"office\":\"UHH9999\",\n\t\"office_hours\":\"NEVER\",\n\t\"person_id\":999999\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admins",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							]
+						},
+						"description": "Attempt to create an admin with an invalid person_id"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/40",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"40"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE admin (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/99999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"99999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"office\":\"IRB1001\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/38",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"38"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT admin (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"person_id\":99999999\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/38",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"38"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT admin (multiple fields)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"office\": \"CSI1115\",\n\t\"office_hours\":\"MW 10:30am-12pm\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/admin/38",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"38"
+							]
+						},
+						"description": "Update multiple admin fields"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admins",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admins?office=ronadlo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							],
+							"query": [
+								{
+									"key": "office",
+									"value": "ronadlo"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admins?office=IRB1001&office_hours=MWF 1-2pm, TuThu 3-4pm",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							],
+							"query": [
+								{
+									"key": "office",
+									"value": "IRB1001"
+								},
+								{
+									"key": "office_hours",
+									"value": "MWF 1-2pm, TuThu 3-4pm"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/admin/38",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"38"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Admin endpoints",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Client Tests",
+			"item": [
+				{
+					"name": "POST client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"corporation_id\":2,\n\t\"person_id\":2\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/clients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST client (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"corporation_id\":999999,\n\t\"person_id\":99999\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/clients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							]
+						},
+						"description": "Attempt to create an admin with an invalid person_id"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/client/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"2"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE client (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/client/999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"person_id\":4\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/client/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"4"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT client (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"person_id\":9999999\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/client/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"4"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT client (multiple fields)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"corporation_id\":2,\n\t\"person_id\":20\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/client/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"4"
+							]
+						},
+						"description": "Update multiple admin fields"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/clients",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/clients?person_id=20",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "person_id",
+									"value": "20"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/clients?person_id=20&corporation_id=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "person_id",
+									"value": "20"
+								},
+								{
+									"key": "corporation_id",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/client/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"client",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Client endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4deb1e6c-865c-44ca-9245-fd330210d9c2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "51ca2730-7675-413d-bf2f-32d2e64c10bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cohort Tests",
+			"item": [
+				{
+					"name": "POST cohort",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\": 30,\n\t\"year\": 2020\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/cohorts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohorts"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST cohort (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\":1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/cohorts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohorts"
+							]
+						},
+						"description": "Attempt to create an admin with an invalid person_id"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE cohort",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cohort/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohort",
+								"3"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE cohort (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cohort/999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohort",
+								"999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT cohort",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"year\":2020\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/cohort/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohort",
+								"4"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT cohort (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\":9999\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/cohort/9999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohort",
+								"9999"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT cohort (multiple fields)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"number\":32,\n\t\"year\": 2021\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/cohort/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohort",
+								"4"
+							]
+						},
+						"description": "Update multiple admin fields"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cohorts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohorts"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cohorts?year=2020",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohorts"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2020"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cohorts?year=2020&number=32",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohorts"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2020"
+								},
+								{
+									"key": "number",
+									"value": "32"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/cohort/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cohort",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Cohort endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f8ee9764-fd44-47c1-b6f3-4c887616e03d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a57312d-b739-4dd8-be9b-ca0d0553e79e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Corporation Tests",
+			"item": [
+				{
+					"name": "POST corporation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Corporation 1\",\n\t\"website\":\"www.corporation1.edu/this-isnt-a-real-link\",\n\t\"description\":\"A corporation that does corporation stuff.\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/corporations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporations"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST corporation (invalid)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/corporations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporations"
+							]
+						},
+						"description": "Attempt to create an admin with an invalid person_id"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE corporation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporation/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporation",
+								"4"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE corporation (invalid)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporation/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporation",
+								""
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT corporation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporation/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporation",
+								""
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT corporation (invalid)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporation/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporation",
+								""
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT corporation (multiple fields)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporation/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporation",
+								""
+							]
+						},
+						"description": "Update multiple admin fields"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporations",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporations"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporations?name=Corporation 1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporations"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Corporation 1"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/corporation/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"corporation",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Corporation endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0056f06b-7316-4e2e-8958-d7af68ae7b8b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "de82d323-36e7-4954-851c-22f07687cfb5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Industry Tests",
+			"item": [
+				{
+					"name": "POST industry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"POST Testing 2\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/industries",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industries"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST industry (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/industries",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industries"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE industry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/industry/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industry",
+								"4"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE industry (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/industry/999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industry",
+								"999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT industry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"PUT Testing 1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/industry/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industry",
+								"2"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT industry (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"new name\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/industry/999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industry",
+								"999"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/industries",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industries"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/industries?name=POST Testing",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"industries"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "POST Testing"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Industry endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8a8b6bb6-2e4c-4949-a6df-4bf085a61e3c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "252feb8b-f631-4f6a-8e41-06050545972e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Permission Tests",
+			"item": [
+				{
+					"name": "POST permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"POST Test 1\",\n\t\"description\":\"Testing POST for Permissions endpoint\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/permissions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permissions"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST permission (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/permissions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permissions"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/permission/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permission",
+								"3"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE permission (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/permission/9999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permission",
+								"9999"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"PUT Test 3\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/permission/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permission",
+								"2"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT permission (invalid)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"PUT Test 1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/permission/9999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permission",
+								"9999"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT permission (multiple fields)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"PUT Test 2\",\n\t\"description\": \"Testing PUT with multiple fields\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/permission/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permission",
+								"2"
+							]
+						},
+						"description": "Update multiple admin fields"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/permissions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permissions"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/permissions?name=Default",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permissions"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Default"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/permission/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"permission",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Permissions endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c4b2c220-c27e-497f-a4a7-b55a29dc77c3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0059898-49e6-4625-af65-85fd92c92064",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Person Tests",
+			"item": [
+				{
+					"name": "POST person",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST person (invalid)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Attempt to create an admin with an invalid person_id"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE person",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE person (invalid)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT person",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT person (invalid)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT person (multiple fields)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Update multiple admin fields"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/persons",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"persons"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/persons?work_state=Maryland",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "work_state",
+									"value": "Maryland"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/persons?work_state=Maryland&work_city=College Park",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"persons"
+							],
+							"query": [
+								{
+									"key": "work_state",
+									"value": "Maryland"
+								},
+								{
+									"key": "work_city",
+									"value": "College Park"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/person/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"person",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Person endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "af04d6e7-e51c-44dc-9d95-3b7000ea5ddf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f30e1ab1-7b91-4565-8d60-bb03f93d05df",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Project Tests",
+			"item": [
+				{
+					"name": "POST project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"POST Test 1\",\n\t\"description\":\"Testing POST for project endpoint.\",\n\t\"poster_path\":\"www.s3.com/this-link-isnt-real\",\n\t\"project_status\":\"0\",\n\t\"impact\":\"Ensures our API works\",\n\t\"faculty_advisor\":\"Dr Purtilo\",\n\t\"team_id\":\"1\",\n\t\"client_id\":\"1\",\n\t\"industries\":[1,2]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/projects",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST project (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"This shouldn't work unless there are 9999 teams\",\n\t\"team_id\":9999\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/projects",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "Attempt to create an admin with an invalid person_id"
+					},
+					"response": []
+				},
+				{
+					"name": "POST project industry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/project/142/industry/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"142",
+								"industry",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/project/143",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"143"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE project (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/project/9999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"9999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE project industry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/project/142/industry/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"142",
+								"industry",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"team_id\":4\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/project/142",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"142"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT project (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"team_id\":0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/project/142",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"142"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT project (multiple fields)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"team_id\":5,\n\t\"project_status\":1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/project/142",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"142"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/projects",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "GET request for all projects"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/projects?project_status=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "project_status",
+									"value": "1"
+								}
+							]
+						},
+						"description": "GET request to projects for published projects"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/projects?project_status=0&team_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "project_status",
+									"value": "0"
+								},
+								{
+									"key": "team_id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "GET all projects where project_status is 0 (unpublished) and team_id = 1"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/project/142",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"142"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Project endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "37c0f3a1-1781-4fae-8b8f-1d3988efa1bf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "28c4b9db-866b-4d78-9f2f-5a565a8d2179",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questee Tests",
+			"item": [
+				{
+					"name": "POST questee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"major\":\"POST Testing 3\",\n\t\"grad_status\":\"0\",\n\t\"uid\":111111111,\n\t\"past_internships\":\"Post Testing INC\",\n\t\"person_id\":2,\n\t\"cohort_id\":1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/questees",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questees"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST questee (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"major\":\"POST Testing 2\",\n\t\"grad_status\":\"0\",\n\t\"uid\":111111111,\n\t\"past_internships\":\"Post Testing INC\",\n\t\"person_id\":2,\n\t\"cohort_id\":1,\n\t\"team_id\":[0]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/questees",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questees"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE questee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/questee/65",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questee",
+								"65"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE questee (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/questee/99999999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questee",
+								"99999999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT questee",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"grad_status\":1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/questee/66",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questee",
+								"66"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT questee (invalid)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"major\":\"non-existent Major\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/questee/99999999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questee",
+								"99999999"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT questee (multiple fields)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"grad_status\":0,\n\t\"major2\":\"PUT Testing 2\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/questee/66",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questee",
+								"66"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/questees",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questees"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/questees?grad_status=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questees"
+							],
+							"query": [
+								{
+									"key": "grad_status",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/questees?grad_status=1&major=Chemistry",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questees"
+							],
+							"query": [
+								{
+									"key": "grad_status",
+									"value": "1"
+								},
+								{
+									"key": "major",
+									"value": "Chemistry"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/questee/66",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"questee",
+								"66"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Questee endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0229f337-dc79-464f-a568-fe921684a011",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b4ef765-4f91-4e54-bfd6-143c06ceef95",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "TA Tests",
+			"item": [
+				{
+					"name": "POST ta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"course\":\"CMSC435\",\n\t\"semester\":\"Spring2020\",\n\t\"questee_id\":66\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/tas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tas"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST ta (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"course\":\"CMSC435\",\n\t\"semester\":\"Spring2020\",\n\t\"questee_id\":999999\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/tas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tas"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST ta team",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ta/10/team/37",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"10",
+								"team",
+								"37"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ta/7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"7"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ta (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ta/999999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"999999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ta team",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ta/10/team/37",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"10",
+								"team",
+								"37"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT ta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"office\":\"IRB4115\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/ta/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"10"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT ta (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"office\":\"NON-EXISTENT\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/ta/999999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"999999"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT ta (multiple fields)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"office\":\"IRB4116\",\n\t\"office_hours\":\"12:00 - 1:30pm\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/ta/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"10"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/tas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tas"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/tas?questee_id=7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tas"
+							],
+							"query": [
+								{
+									"key": "questee_id",
+									"value": "7"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/tas?questee_id=7&course=390",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tas"
+							],
+							"query": [
+								{
+									"key": "questee_id",
+									"value": "7"
+								},
+								{
+									"key": "course",
+									"value": "390"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ta/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ta",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for TA endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f45d6985-b826-4835-b9a2-c4fe0cddcf97",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9463be8-da01-48c9-9676-f240fa052d72",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Team Tests",
+			"item": [
+				{
+					"name": "POST team",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"POST Team 3\",\n\t\"semester\":\"Spring 2020\",\n\t\"course\":\"CMSC435\",\n\t\"questee_ids\":[64,66,67],\n\t\"ta_ids\":[10]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/teams",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST team (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"POST Team 1\",\n\t\"semester\":\"Spring 2020\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/teams",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							]
+						},
+						"description": "Create an admin"
+					},
+					"response": []
+				},
+				{
+					"name": "POST team ta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/39/ta/6",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"39",
+								"ta",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST team questee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/39/questee/63",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"39",
+								"questee",
+								"63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE team",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/38",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"38"
+							]
+						},
+						"description": "DELETE an admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE team (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/999999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"999999"
+							]
+						},
+						"description": "Attempt to DELETE a non-existent admin from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE team ta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/39/ta/6",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"39",
+								"ta",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE team questee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/39/questee/63",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"39",
+								"questee",
+								"63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT team",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"PUT Test 6\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/team/39",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"39"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT team (invalid)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/999999",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"999999"
+							]
+						},
+						"description": "Update admin field"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT team (multiple fields)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"PUT Test 7\",\n\t\"course\":\"CMSC351\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/team/39",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"39"
+							]
+						},
+						"description": "Update multiple admin fields"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/teams",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							]
+						},
+						"description": "Grab all admin info"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/teams?course=490",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							],
+							"query": [
+								{
+									"key": "course",
+									"value": "490"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all query (multiple params)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/teams?course=490&name=Google",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"teams"
+							],
+							"query": [
+								{
+									"key": "course",
+									"value": "490"
+								},
+								{
+									"key": "name",
+									"value": "Google"
+								}
+							]
+						},
+						"description": "Query admins with given url parameters"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/39",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"39"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Tests for Team endpoints",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "86a92ebd-20a4-4a7e-945f-695d02c31361",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d93bb004-2ce2-42d4-a1e7-bd5d7cc4b1fd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User Tests",
+			"item": [
+				{
+					"name": "POST login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d70a4bc2-a007-40a2-8e0d-f2e842697e3f",
+								"exec": [
+									"var token = responseBody\r",
+									"token = token.replace(/\"/g,\"\")\r",
+									"token = token.replace(/\\n$/, \"\")\r",
+									"pm.environment.set(\"token\", token);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@gmail.com\",\n\t\"pwd\":\"123\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"signin"
+							]
+						},
+						"description": "POST to login endpoint. Returns token to use in other post, put, or delete class of API"
+					},
+					"response": []
+				},
+				{
+					"name": "POST login (invalid email)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8869484a-13cf-4259-b8bb-23ec7ab0eb55",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"non_existent_email_address@gmail.com\",\n\t\"pwd\":\"123\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"signin"
+							]
+						},
+						"description": "POST to login endpoint with an invalid email"
+					},
+					"response": []
+				},
+				{
+					"name": "POST login (invalid pwd)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "734b531b-30b0-48ec-b54a-baecad61aeec",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@gmail.com\",\n\t\"pwd\":\"invalid_password\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"signin"
+							]
+						},
+						"description": "POST to login endpoint with a valid email but invalid password"
+					},
+					"response": []
+				},
+				{
+					"name": "POST user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"postTestEmail3@umd.edu\",\n\t\"pwd\":\"super_secure_pass\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Create a user"
+					},
+					"response": []
+				},
+				{
+					"name": "POST user (invalid email)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"postTestEmail2@umd.edu\",\n\t\"pwd\":\"super_secure_pass\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Attempt to create a user with an email that is already in use"
+					},
+					"response": []
+				},
+				{
+					"name": "POST add permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/209/permission/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"209",
+								"permission",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/210",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"210"
+							]
+						},
+						"description": "Delete a user from user/<id> endpoint"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE user (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/10000",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"10000"
+							]
+						},
+						"description": "Delete a user from user/<id> endpoint"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE user permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/209/permission/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"209",
+								"permission",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"putTestEmail2@umd.edu\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/136",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"136"
+							]
+						},
+						"description": "Update a user's email address"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT user (multiple fields)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"putTestEmail3@umd.edu\",\n\t\"pwd\": \"brand_new_pwd\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/136",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"136"
+							]
+						},
+						"description": "Update a user's email address and password in 1 request"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT user (invalid)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"UnlessThereAreOver10000UsersThisTestShouldntWork@umd.edu\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/10000",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"10000"
+							]
+						},
+						"description": "Test error handling when using PUT for user"
+					},
+					"response": []
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Retrieve id and email of all users"
+					},
+					"response": []
+				},
+				{
+					"name": "GET single user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/209",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"209"
+							]
+						},
+						"description": "GET a single user using resourceful route"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

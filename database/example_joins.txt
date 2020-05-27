@@ -1,0 +1,50 @@
+###########
+Query to select all teams, with lists of related tas and questees_teams_rel
+###########
+
+SELECT id, name, semester, course, JSON_ARRAYAGG(ta_id) as ta_ids, JSON_ARRAYAGG(questee_id) AS questee_ids 
+FROM teams 
+LEFT OUTER JOIN questees_teams_rel 
+ON teams.id=questees_teams_rel.team_id 
+LEFT OUTER JOIN tas_teams_rel
+ON teams.id=tas_teams_rel.ta_id
+GROUP by id;
+
+###########
+EXAMPLE RESPONSE
+###########
+
++----+-----------------------+-------------+---------+--------------+-------------+
+| id | name                  | semester    | course  | ta_ids       | questee_ids |
++----+-----------------------+-------------+---------+--------------+-------------+
+|  1 | Team 1                | Spring 2020 | CMSC435 | [null, null] | [6, 7]      |
+|  2 | Team 2                | Fall 2019   | CMSC433 | [null]       | [null]      |
+|  3 | Leidos                | Fall 2020   | 490     | [null]       | [null]      |
+|  4 | The best in the world | Summer2021  | 490     | [null]       | [null]      |
++----+-----------------------+-------------+---------+--------------+-------------+
+
+###########
+Query to select all questees, with lists of related teams
+###########
+
+SELECT id, major, major2, grad_status, uid, involved, areas_of_expertise, past_internships, quest_clubs, resume_id, person_id, cohort_id, JSON_ARRAYAGG(team_id) as team_ids 
+FROM questees 
+LEFT OUTER JOIN questees_teams_rel 
+ON questees.id=questees_teams_rel.questee_id 
+GROUP by id;
+
+###########
+EXAMPLE RESPONSE (abbreviated)
+###########
+
++----+------------------+-----------+-----------+-----------+-----------+----------+
+| id | major            | major2    | resume_id | person_id | cohort_id | team_ids |
++----+------------------+-----------+-----------+-----------+-----------+----------+
+|  6 | Computer Science | Astronomy |      NULL |         3 |         1 | [1]      |
+|  7 | Computer Science | NULL      |      NULL |         3 |         1 | [1]      |
+|  8 | Computer Science | NULL      |      NULL |         3 |         1 | [null]   |
+|  9 | Computer Science | NULL      |      NULL |         3 |         1 | [null]   |
+| 10 | Computer Science | NULL      |      NULL |         3 |         1 | [null]   |
+| 11 | Computer Science | NULL      |      NULL |         3 |         1 | [null]   |
+| 13 | Art              | NULL      |      NULL |         3 |         1 | [null]   |
++----+------------------+-----------+-----------+-----------+-----------+----------+
