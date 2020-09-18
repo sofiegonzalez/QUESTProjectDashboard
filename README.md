@@ -2,6 +2,8 @@
 Capstone Project for the QUEST program at UMD <br>
 Worked with a team of seven students (named team qubit)
 
+http://projects.questumd.com.s3-website-us-east-1.amazonaws.com/
+
 The objective of this project is to create a new unified management system and provide a dashboard to display projects and allow administrators to manipulate data. To accomplish this, the QUBIT team has decided to create a unified database to house the current QUEST data, an API to facilitate future development, a web application to display projects created by QUEST students, and thorough documentation for future developers. This unified database and API will set the groundwork in place to allow the flow of data between the many disparate applications QUEST admins currently interact with. This will allow for the time that was used transferring data to be saved. Due to the fact the development effort to interface the existing systems with the new API exceeds the team’s time, after meetings with Jess and Danny the decision has been made to instead build a Project Dashboard, adding additional tools to enhance the QUEST admin workflow. The goal is to provide a functional system that makes the QUEST workflow more efficient while being flexible enough to be extended as QUEST grows.
 
 
